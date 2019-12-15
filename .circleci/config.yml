@@ -1,9 +1,0 @@
-version: 2.1
-orbs:
-  docker-buildx: foodles/docker-buildx@0.0.1
-workflows:
-  build:
-    jobs:
-      - docker-buildx/publish:
-          image: aianus/udptunnel
-          extra_build_args: "--platform linux/amd64,linux/arm64"

@@ -1,0 +1,18 @@
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+
+build:
+  image: jonoh/docker-buildx-qemu
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login --username $DOCKERHUB_USERNAME --password-stdin <<EOF
+      $DOCKERHUB_PASSWORD
+      EOF
+    # Use docker-container driver to allow useful features (push/multi-platform)
+    - docker buildx create --driver docker-container --use
+    - docker buildx inspect --bootstrap    
+  script:
+    - update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
+    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --pull -t "$IMAGE_REPOSITORY:latest" --push .
