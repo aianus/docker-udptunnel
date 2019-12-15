@@ -12,4 +12,4 @@ jobs:
           docker buildx create --driver docker-container --use aianus_udptunnel
           docker buildx inspect --bootstrap
           update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
-          docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t aianus/udptunnel:latest --push .
+          docker buildx build --platform linux/amd64,linux/arm64 -t aianus/udptunnel:latest --push .
