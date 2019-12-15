@@ -7,9 +7,7 @@ build:
   services:
     - docker:dind
   before_script:
-    - docker login --username $DOCKERHUB_USERNAME --password-stdin <<EOF
-      $DOCKERHUB_PASSWORD
-      EOF
+    - echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
     # Use docker-container driver to allow useful features (push/multi-platform)
     - docker buildx create --driver docker-container --use
     - docker buildx inspect --bootstrap    
