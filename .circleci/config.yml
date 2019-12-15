@@ -1,9 +1,8 @@
 version: 2.1
+orbs:
+  docker-buildx: foodles/docker-buildx@0.0.1
 jobs:
   build:
-    orbs:
-      docker-buildx: foodles/docker-buildx@0.0.1
-    steps:
       steps:
         - docker-buildx/publish:
             image: aianus/udptunnel
