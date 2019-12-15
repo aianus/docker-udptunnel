@@ -1,16 +1,11 @@
 version: 2.1
 jobs:
   build:
-    docker:
-      - image: jonoh/docker-buildx-qemu
+    orbs:
+      docker-buildx: foodles/docker-buildx@0.0.1
     steps:
-      - checkout
-      - setup_remote_docker
-      - run: |
-          echo $DOCKERHUB_ACCESS_TOKEN | docker login -u aianus --password-stdin
-          update-binfmts --enable # Important: Ensures execution of other binary formats is enabled in the kernel
-          docker run --rm --privileged multiarch/qemu-user-static:register --reset
-          docker context create aianus_udptunnel
-          docker buildx create --driver docker-container --use aianus_udptunnel
-          docker buildx inspect --bootstrap
-          docker buildx build --platform linux/amd64,linux/arm64 -t aianus/udptunnel:latest --push .
+      steps:
+        - docker-buildx:
+            image: aianus/udptunnel
+            docker-username: aianus
+            docker-password: $DOCKERHUB_ACCESS_TOKEN
