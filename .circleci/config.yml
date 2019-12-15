@@ -5,7 +5,7 @@ jobs:
       docker-buildx: foodles/docker-buildx@0.0.1
     steps:
       steps:
-        - docker-buildx:
+        - docker-buildx/publish:
             image: aianus/udptunnel
             docker-username: aianus
             docker-password: $DOCKERHUB_ACCESS_TOKEN
