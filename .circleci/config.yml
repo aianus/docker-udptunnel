@@ -2,10 +2,5 @@ version: 2.1
 orbs:
   docker-buildx: foodles/docker-buildx@0.0.1
 jobs:
-  build:
-    executor: machine
-    steps:
-      - docker-buildx/publish:
-          image: aianus/udptunnel
-          docker-username: aianus
-          docker-password: $DOCKERHUB_ACCESS_TOKEN
+  - docker-buildx/publish:
+      image: aianus/udptunnel
