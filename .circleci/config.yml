@@ -6,3 +6,4 @@ workflows:
     jobs:
       - docker-buildx/publish:
           image: aianus/udptunnel
+          extra_build_args: "--platform linux/amd64,linux/arm64"
